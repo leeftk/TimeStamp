@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<h2> Photo Timestamp App</h2>
+  <style>
+    /* Image Designing Propoerties */
+    .thumb {
+        height: 75px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
+   p.round3 {
+    border: 2px solid red;
+    border-radius: 12px;
+}
+    
+</style>
+<head>
+<p id="round3">
+<input type="file" type="text" name="field" value="" size="11" width="100" onchange="previewFile();setTime()"><br>
+<img src="" height="200" alt="Image preview...">
+<br>
+<br>
+</p>
+</head>
+<body>
+ <script type="text/javascript">
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  };
+
+  previewFile();
+function getTimeStamp() {
+       var stamp = new Date();
+       return ((stamp.getMonth() + 1) + '/' + (stamp.getDate()) + '/' + stamp.getFullYear() + " " + stamp.getHours() + ':'
+                     + ((stamp.getMinutes() < 10) ? ("0" + stamp.getMinutes()) : (stamp.getMinutes())) + ':' + ((stamp.getSeconds() < 10) ? ("0" + stamp.getSeconds()) : (stamp.getSeconds())));
+}
+
+
+  function setTime() {
+    document.getElementById('field').value = getTimeStamp();
+
+}
+
+</script>
+<input id="field" type="text" name="field" value="" size="15" />
+<button type="button" on="setTime();">Upload</button>
+</body>
+
+</html>
